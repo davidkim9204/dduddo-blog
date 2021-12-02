@@ -10,6 +10,8 @@
   align-items: center;
 }
 
-.backToHome {
-  margin: 3rem 0 0;
+.headerDetail {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 1rem 0 2rem;
 }
