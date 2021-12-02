@@ -1,0 +1,7 @@
+.headerLink {
+  margin-right: 1rem;
+}
+
+a.headerLink:hover {
+  background-color: green;
+}

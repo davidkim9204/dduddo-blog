@@ -16,6 +16,7 @@ export default function Home() {
       </Head>
       <div>
         <span>{text} 적용 완료</span>
+        <span>카드 형식의 글 내용</span>
       </div>
     </Layout>
   );
