@@ -5,13 +5,10 @@ const Header = () => {
   return (
     <div>
       <Link href="/">
-        <a className={styles.headerLink}>홈</a>
+        <a className={styles.headerLink}>홈(글)</a>
       </Link>
       <Link href="/about">
         <a className={styles.headerLink}>소개</a>
-      </Link>
-      <Link href="/posts">
-        <a className={styles.headerLink}>글</a>
       </Link>
     </div>
   );
