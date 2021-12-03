@@ -26,7 +26,6 @@ export async function getStaticProps() {
 }
 
 function Home({ allPostsData }: allPostsData) {
-  console.log(allPostsData);
   return (
     <Layout home>
       <Head>
@@ -35,12 +34,14 @@ function Home({ allPostsData }: allPostsData) {
       <ul className={utilStyles.list}>
         <div className={homeStyles.grid}>
           {allPostsData.map((data: post) => (
-            <div className={homeStyles.column}>
+            <div className={homeStyles.column} key={data.id}>
               <div className={homeStyles.card}>
                 <li className={utilStyles.listItem} key={data.id}>
-                  <PostLink id={data.id} title={data.title} />
-                  {data.date}
-                  <br />
+                  <ul>
+                    <PostLink id={data.id} title={data.title} />
+                    {data.date}
+                    <br />
+                  </ul>
                 </li>
               </div>
             </div>
