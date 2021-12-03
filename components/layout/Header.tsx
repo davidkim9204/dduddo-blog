@@ -10,7 +10,7 @@ const Header = () => {
       <Link href="/about">
         <a className={styles.headerLink}>소개</a>
       </Link>
-      <Link href="/posts">
+      <Link href="/post">
         <a className={styles.headerLink}>글</a>
       </Link>
     </div>
