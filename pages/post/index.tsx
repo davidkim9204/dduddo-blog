@@ -11,6 +11,11 @@ function Post() {
   return (
     <Layout home={false}>
       <h1>{router.query.title}</h1>
+      <div className={utilStyles.backToHome}>
+        <Link href="/">
+          <a>← Back to posts</a>
+        </Link>
+      </div>
     </Layout>
   );
 }
