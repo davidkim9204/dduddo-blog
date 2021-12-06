@@ -53,7 +53,7 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id: string) {
+export async function getPostData(id: string | string[] | undefined) {
   const fullPath = path.join(postsDirectory, `${id}-post.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 

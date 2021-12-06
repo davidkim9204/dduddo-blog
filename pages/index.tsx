@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout/Layout';
 import PostLink from 'components/layout/PostLink';
 import { getSortedPostsData } from '../lib/posts';

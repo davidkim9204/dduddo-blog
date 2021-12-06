@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Layout from '../../components/layout/Layout';
 import utilStyles from '../../styles/utils.module.css';
 import { getAllPostIds, getPostData } from '../../lib/posts';
+import { PostContent } from '../../model/posts';
 
 // export async function getStaticPaths() {
 //   const paths = getAllPostIds();
@@ -13,13 +14,7 @@ import { getAllPostIds, getPostData } from '../../lib/posts';
 //   };
 // }
 interface postData {
-  postData: post;
-}
-interface post {
-  title: string;
-  id: string;
-  date: string;
-  contentHtml: string;
+  postData: PostContent;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -31,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const postData = await getPostData(context.params.id);
+  const postData = await getPostData(context?.params?.id);
   return {
     props: {
       postData,
@@ -55,7 +50,7 @@ function Post({ postData }: postData) {
       <br />
       {postData.date}
       <br />
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml! }} />
       <div className={utilStyles.backToHome}>
         <Link href="/">
           <a>← Back to posts</a>
