@@ -10,6 +10,9 @@ const Header = () => {
       <Link href="/about">
         <a className={styles.headerLink}>소개</a>
       </Link>
+      <Link href="/write">
+        <a className={styles.headerLink}>글 쓰기</a>
+      </Link>
     </div>
   );
 };
