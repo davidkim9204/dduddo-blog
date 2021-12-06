@@ -8,7 +8,7 @@ interface post {
 function PostLink(props: post) {
   return (
     <li>
-      <Link as={`/p/${props.id}`} href={`/post?title=${props.title}`}>
+      <Link href={`/post/${props.id}`}>
         <a>{props.title}</a>
       </Link>
     </li>

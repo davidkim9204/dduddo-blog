@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout/Layout';
 import PostLink from 'components/layout/PostLink';
 import { getSortedPostsData } from '../lib/posts';
 import utilStyles from '../styles/utils.module.css';
 import homeStyles from '../styles/Home.module.css';
-
-interface allPostsData {
-  allPostsData: post[];
-}
-interface post {
-  date: string;
-  id: string;
-  title: string;
-}
+import { AllPostsData, PostContent } from '../model/posts';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -25,8 +16,7 @@ export async function getStaticProps() {
   };
 }
 
-function Home({ allPostsData }: allPostsData) {
-  console.log(allPostsData);
+function Home({ allPostsData }: AllPostsData) {
   return (
     <Layout home>
       <Head>
@@ -34,13 +24,15 @@ function Home({ allPostsData }: allPostsData) {
       </Head>
       <ul className={utilStyles.list}>
         <div className={homeStyles.grid}>
-          {allPostsData.map((data: post) => (
-            <div className={homeStyles.column}>
+          {allPostsData.map((data: PostContent) => (
+            <div className={homeStyles.column} key={data.id}>
               <div className={homeStyles.card}>
                 <li className={utilStyles.listItem} key={data.id}>
-                  <PostLink id={data.id} title={data.title} />
-                  {data.date}
-                  <br />
+                  <ul>
+                    <PostLink id={data.id} title={data.title} />
+                    {data.date}
+                    <br />
+                  </ul>
                 </li>
               </div>
             </div>
