@@ -3,14 +3,18 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 
 // TOAST UI Editor Plugins
-import chart from '@toast-ui/editor-plugin-chart';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
-import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
-import uml from '@toast-ui/editor-plugin-uml';
+// import chart from '@toast-ui/editor-plugin-chart';
+// import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+// import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+// import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 
 const ToastEditor = () => {
   const editorRef = createRef<Editor>();
+
+  const date = new Date();
+  const filterDate =
+    date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  const initalValue = `\n title:' '\n date:${filterDate}\n`;
 
   const btnClickListner = () => {
     console.log(editorRef);
@@ -19,14 +23,12 @@ const ToastEditor = () => {
     console.log(eI);
     const md = eI?.getMarkdown();
     console.log(md);
-    const hm = eI?.getHtml();
-    console.log(hm);
   };
 
   return (
     <>
       <Editor
-        initialValue="hello react editor world!"
+        initialValue={initalValue}
         previewStyle="vertical"
         height="600px"
         initialEditType="wysiwyg"
