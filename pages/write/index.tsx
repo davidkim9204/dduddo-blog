@@ -3,10 +3,22 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Layout from '../../components/layout/Layout';
 import utilStyles from '../../styles/utils.module.css';
+import { GetStaticProps } from 'next';
+import { writePostData } from '../../lib/posts';
 
 const ToastEditor = dynamic(() => import('components/editor/ToastEditor'), {
   ssr: false,
 });
+
+export const getStaticProps: GetStaticProps = async () => {
+  console.log('===1');
+  const postData = await writePostData('test');
+  return {
+    props: {
+      postData,
+    },
+  };
+};
 
 export default function Write() {
   return (

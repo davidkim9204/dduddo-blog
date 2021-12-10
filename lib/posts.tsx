@@ -72,3 +72,15 @@ export async function getPostData(id: string | string[] | undefined) {
     ...matterResult.data,
   };
 }
+
+export async function writePostData(contents: string) {
+  const fileNames = fs.readdirSync(postsDirectory);
+  const length = fileNames.length + 1;
+  fs.writeFile(`${postsDirectory}/${length}-post.md`, contents, (err) => {
+    if (err === null) {
+      return console.log('success');
+    } else {
+      return console.log('fail');
+    }
+  });
+}

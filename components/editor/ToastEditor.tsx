@@ -17,12 +17,9 @@ const ToastEditor = () => {
   const initalValue = `\n title:' '\n date:${filterDate}\n`;
 
   const btnClickListner = () => {
-    console.log(editorRef);
     const eI =
       editorRef && editorRef.current && editorRef.current.getInstance();
-    console.log(eI);
     const md = eI?.getMarkdown();
-    console.log(md);
   };
 
   return (
