@@ -1,6 +1,8 @@
 import { useRef, useState, createRef } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
+import WriteSuccess from 'pages/writeSuccess';
+import Router from 'next/router';
 
 // TOAST UI Editor Plugins
 // import chart from '@toast-ui/editor-plugin-chart';
@@ -20,6 +22,8 @@ const ToastEditor = () => {
     const eI =
       editorRef && editorRef.current && editorRef.current.getInstance();
     const md = eI?.getMarkdown();
+    // store에 저장할 값 udpate.
+    Router.push('/writeSuccess');
   };
 
   return (
