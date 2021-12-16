@@ -1,4 +1,5 @@
 import { useRef, useState, createRef } from 'react';
+import dynamic from 'next/dynamic';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import WriteSuccess from 'pages/writeSuccess';
@@ -12,6 +13,7 @@ import Router from 'next/router';
 
 const ToastEditor = () => {
   const editorRef = createRef<Editor>();
+  const [editorContent, setEditorContent] = useState<string>('');
 
   const date = new Date();
   const filterDate =
@@ -22,8 +24,7 @@ const ToastEditor = () => {
     const eI =
       editorRef && editorRef.current && editorRef.current.getInstance();
     const md = eI?.getMarkdown();
-    // store에 저장할 값 udpate.
-    Router.push('/writeSuccess');
+    md && setEditorContent(md);
   };
 
   return (
@@ -37,7 +38,11 @@ const ToastEditor = () => {
         // plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
         ref={editorRef}
       />
-      <button onClick={btnClickListner}>콘솔에 찍히냐</button>
+      {editorContent ? (
+        <WriteSuccess editorContent={editorContent} />
+      ) : (
+        <button onClick={btnClickListner}>저장</button>
+      )}
     </>
   );
 };
