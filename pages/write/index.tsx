@@ -14,11 +14,8 @@ export default function Write() {
       <Head>
         <title>Write blog</title>
       </Head>
-      <ToastEditor />
       <div className="save-post">
-        <Link href="/post/save">
-          <a>저장하기</a>
-        </Link>
+        <ToastEditor />
       </div>
       <div className={utilStyles.backToHome}>
         <Link href="/">

@@ -1,32 +1,36 @@
 import { useRef, useState, createRef } from 'react';
+import dynamic from 'next/dynamic';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
+import WriteSuccess from 'pages/writeSuccess';
+import Router from 'next/router';
 
 // TOAST UI Editor Plugins
-import chart from '@toast-ui/editor-plugin-chart';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
-import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
-import uml from '@toast-ui/editor-plugin-uml';
+// import chart from '@toast-ui/editor-plugin-chart';
+// import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+// import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+// import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 
 const ToastEditor = () => {
   const editorRef = createRef<Editor>();
+  const [editorContent, setEditorContent] = useState<string>('');
+
+  const date = new Date();
+  const filterDate =
+    date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  const initalValue = `\n title:' '\n date:${filterDate}\n`;
 
   const btnClickListner = () => {
-    console.log(editorRef);
     const eI =
       editorRef && editorRef.current && editorRef.current.getInstance();
-    console.log(eI);
     const md = eI?.getMarkdown();
-    console.log(md);
-    const hm = eI?.getHtml();
-    console.log(hm);
+    md && setEditorContent(md);
   };
 
   return (
     <>
       <Editor
-        initialValue="hello react editor world!"
+        initialValue={initalValue}
         previewStyle="vertical"
         height="600px"
         initialEditType="wysiwyg"
@@ -34,7 +38,11 @@ const ToastEditor = () => {
         // plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
         ref={editorRef}
       />
-      <button onClick={btnClickListner}>콘솔에 찍히냐</button>
+      {editorContent ? (
+        <WriteSuccess editorContent={editorContent} />
+      ) : (
+        <button onClick={btnClickListner}>저장</button>
+      )}
     </>
   );
 };
