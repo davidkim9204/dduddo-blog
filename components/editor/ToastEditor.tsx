@@ -18,15 +18,22 @@ const ToastEditor = () => {
   const [editorContent, setEditorContent] = useState<string>('');
 
   const date = new Date();
-  const filterDate =
-    date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-  const initalValue = `\n title:' '\n date:${filterDate}\n`;
+  let getMonth = date.getMonth() + 1 + '';
+  if (getMonth === '13') {
+    getMonth = '01';
+  } else if (getMonth.length < 2) {
+    getMonth = '0' + getMonth;
+  }
+  const filterDate = date.getFullYear() + '-' + getMonth + '-' + date.getDate();
+  console.log('filterDate', filterDate);
+  const initalValue = `\n title:' '\n date:'${filterDate}'\n`;
 
   const btnClickListner = () => {
     const eI =
       editorRef && editorRef.current && editorRef.current.getInstance();
     const md = eI?.getMarkdown();
     md && setEditorContent(md);
+    console.log(md);
   };
 
   return (
