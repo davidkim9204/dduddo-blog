@@ -39,9 +39,6 @@ function Home({ allPostsData }: AllPostsData) {
           ))}
         </div>
       </ul>
-      {/* <div>
-        <span>카드 형식의 글 내용</span>
-      </div> */}
     </Layout>
   );
 }

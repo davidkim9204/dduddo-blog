@@ -5,14 +5,6 @@ import Layout from '../../components/layout/Layout';
 import utilStyles from '../../styles/utils.module.css';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import { PostContent } from '../../model/posts';
-
-// export async function getStaticPaths() {
-//   const paths = getAllPostIds();
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
 interface postData {
   postData: PostContent;
 }
@@ -33,15 +25,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
   };
 };
-
-// export async function getStaticProps({ params }) {
-//   const postData = await getPostData(params.id);
-//   return {
-//     props: {
-//       postData,
-//     },
-//   };
-// }
 
 function Post({ postData }: postData) {
   return (
