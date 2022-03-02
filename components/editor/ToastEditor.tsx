@@ -1,6 +1,7 @@
-import { useRef, useState, createRef } from 'react';
+import { useState, createRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import WriteSuccess from 'pages/writeSuccess';
+// import { saveData } from '../../lib/posts';
 
 import '@toast-ui/editor/dist/toastui-editor.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
@@ -16,21 +17,37 @@ import uml from '@toast-ui/editor-plugin-uml';
 const ToastEditor = () => {
   const editorRef = createRef<Editor>();
   const [editorContent, setEditorContent] = useState<string>('');
+  const [title, setTitle] = useState('');
 
   const date = new Date();
-  const filterDate =
-    date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-  const initalValue = `\n title:' '\n date:${filterDate}\n`;
+  let getMonth = date.getMonth() + 1 + '';
+  if (getMonth === '13') {
+    getMonth = '01';
+  } else if (getMonth.length < 2) {
+    getMonth = '0' + getMonth;
+  }
+  const getDate = date.getDate() > 10 ? date.getDate() : '0' + date.getDate();
+  const filterDate = date.getFullYear() + '-' + getMonth + '-' + getDate;
+  // const initalValue = `\n title:' '\n date:'${filterDate}'\n`;
+  const initalValue = '';
 
-  const btnClickListner = () => {
+  const btnClickListner = async () => {
     const eI =
       editorRef && editorRef.current && editorRef.current.getInstance();
     const md = eI?.getMarkdown();
     md && setEditorContent(md);
+    console.log(md);
+
+    // saveData(title, filterDate, md);
+  };
+
+  const handleChange = (e) => {
+    setTitle(e.target.value);
   };
 
   return (
     <>
+      <input type="text" required value={title} onChange={handleChange} />
       <Editor
         initialValue={initalValue}
         previewStyle="vertical"
